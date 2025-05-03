@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Chore List</h1>
+
+    <form method="POST">
+        <label for="description">Chore:</label>
+        <input type="text" id="description" name="description" required>
+        
+        <label for="value">Allowance Value:</label>
+        <input type="number" id="value" name="value" value="1" required>
+        
+        <button type="submit">Add Chore</button>
+    </form>
+
+    <ul>
+        {% for chore in chores %}
+        <li>
+            {{ chore.description }} — ${{ chore.value }} 
+            {% if chore.is_complete %}(Done){% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
